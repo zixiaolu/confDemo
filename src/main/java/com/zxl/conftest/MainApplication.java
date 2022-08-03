@@ -1,6 +1,9 @@
 package com.zxl.conftest;
 import com.fasterxml.jackson.dataformat.toml.TomlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigBeanFactory;
+import com.typesafe.config.ConfigFactory;
 import com.zxl.conf.dataBaseConf;
 import com.zxl.conf.dbServ;
 import org.yaml.snakeyaml.Yaml;
@@ -12,7 +15,9 @@ import java.io.InputStream;
 
 public class  MainApplication {
     public static void main(String[] args) throws IOException {
+        parseYaml();
         paresToml();
+        paresHocon();
     }
 
     public static void parseYaml(){
@@ -43,6 +48,17 @@ public class  MainApplication {
         System.out.println(result.getDatabase().get("2001"));
         System.out.println(result.getDatabase().get("2002"));
         System.out.println(result.getDatabase().get("2003"));
+    }
+
+    public static void paresHocon(){
+        Config conf = ConfigFactory.load("database4.conf");
+        String prefix = "database.";
+        String un = "username";
+        String ps = "password";
+        String ur = "url";
+        System.out.println(conf.getString(prefix+"2001."+un));
+        System.out.println(conf.getString(prefix+"2001."+ps));
+        System.out.println( conf.getString(prefix+"2001."+ur));
     }
 
 }
