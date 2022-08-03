@@ -4,8 +4,9 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigBeanFactory;
 import com.typesafe.config.ConfigFactory;
+import com.zxl.conf.HoconConf;
 import com.zxl.conf.dataBaseConf;
-import com.zxl.conf.DbServ;
+import com.zxl.conf.TomlConf;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
@@ -35,16 +36,18 @@ public class  MainApplication {
     public static void paresToml() throws IOException {
         InputStream content = MainApplication.class.getClassLoader().getResourceAsStream("database3.toml");
         TomlMapper tomlMapper = new TomlMapper();
-        DbServ result = tomlMapper.readValue(content, DbServ.class);
+        TomlConf result = tomlMapper.readValue(content, TomlConf.class);
+        System.out.println(result.getClientIp());
         System.out.println(result.getDatabase().get("2001"));
         System.out.println(result.getDatabase().get("2002"));
         System.out.println(result.getDatabase().get("2003"));
+        System.out.println(result.getRedis().get("2001"));
     }
 
     public static void paresYamlByJackSon() throws IOException {
         InputStream content = MainApplication.class.getClassLoader().getResourceAsStream("database.yml");
         YAMLMapper mapper = new YAMLMapper();
-        DbServ result = mapper.readValue(content, DbServ.class);
+        TomlConf result = mapper.readValue(content, TomlConf.class);
         System.out.println(result.getDatabase().get("2001"));
         System.out.println(result.getDatabase().get("2002"));
         System.out.println(result.getDatabase().get("2003"));
@@ -52,10 +55,10 @@ public class  MainApplication {
 
     public static void paresHocon(){
         Config conf = ConfigFactory.load("database4.conf");
-        DbServ dbServs = ConfigBeanFactory.create(conf, DbServ.class);
-        System.out.println(dbServs.getDatabase().get("2001"));
-        System.out.println(dbServs.getDatabase().get("2002"));
-        System.out.println(dbServs.getDatabase().get("2003"));
+        HoconConf hoconConf = ConfigBeanFactory.create(conf, HoconConf.class);
+        System.out.println(hoconConf.getClientIp());
+        System.out.println(hoconConf.getDatabase().get("2001"));
+        System.out.println(hoconConf.getDatabase().get("2002"));
     }
 
 }

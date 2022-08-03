@@ -2,8 +2,9 @@ package com.zxl.conf;
 
 import java.util.Map;
 
-public class dataBaseConf {
+public class TomlConf {
     Map<String,Serv> database;
+    Map<String,Serv> redis;
     String clientIp;
 
     public Map<String, Serv> getDatabase() {
@@ -12,6 +13,14 @@ public class dataBaseConf {
 
     public void setDatabase(Map<String, Serv> database) {
         this.database = database;
+    }
+
+    public Map<String, Serv> getRedis() {
+        return redis;
+    }
+
+    public void setRedis(Map<String, Serv> redis) {
+        this.redis = redis;
     }
 
     public String getClientIp() {

@@ -1,3 +1,5 @@
+clientIp = "127.0.0.1"
+#对于需要独立的字段，需要编写声明在表字段上，如此处的clientIp
 [database]
   [database.2001]
     username = "root"
@@ -11,3 +13,9 @@
     username = "root"
     password = 123456
     url = "bcd"
+[redis]
+  [redis.2001]
+    username = "root"
+    password = 123456
+    url = "localhost"
+#Toml文件配置可以没有对应的缩进需求，注意每个节点的编写包覆即可

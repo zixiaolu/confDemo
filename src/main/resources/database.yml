@@ -11,3 +11,5 @@ database:
     username: root
     password: 0234
     url: database3
+#yml配置更加直观，便于阅读每个字段的实际意义
+clientIp: 127.0.0.1
