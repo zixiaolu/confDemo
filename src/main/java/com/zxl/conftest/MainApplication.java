@@ -5,7 +5,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigBeanFactory;
 import com.typesafe.config.ConfigFactory;
 import com.zxl.conf.dataBaseConf;
-import com.zxl.conf.dbServ;
+import com.zxl.conf.DbServ;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
@@ -35,7 +35,7 @@ public class  MainApplication {
     public static void paresToml() throws IOException {
         InputStream content = MainApplication.class.getClassLoader().getResourceAsStream("database3.toml");
         TomlMapper tomlMapper = new TomlMapper();
-        dbServ result = tomlMapper.readValue(content,dbServ.class);
+        DbServ result = tomlMapper.readValue(content, DbServ.class);
         System.out.println(result.getDatabase().get("2001"));
         System.out.println(result.getDatabase().get("2002"));
         System.out.println(result.getDatabase().get("2003"));
@@ -44,7 +44,7 @@ public class  MainApplication {
     public static void paresYamlByJackSon() throws IOException {
         InputStream content = MainApplication.class.getClassLoader().getResourceAsStream("database.yml");
         YAMLMapper mapper = new YAMLMapper();
-        dbServ result = mapper.readValue(content,dbServ.class);
+        DbServ result = mapper.readValue(content, DbServ.class);
         System.out.println(result.getDatabase().get("2001"));
         System.out.println(result.getDatabase().get("2002"));
         System.out.println(result.getDatabase().get("2003"));
@@ -52,13 +52,10 @@ public class  MainApplication {
 
     public static void paresHocon(){
         Config conf = ConfigFactory.load("database4.conf");
-        String prefix = "database.";
-        String un = "username";
-        String ps = "password";
-        String ur = "url";
-        System.out.println(conf.getString(prefix+"2001."+un));
-        System.out.println(conf.getString(prefix+"2001."+ps));
-        System.out.println( conf.getString(prefix+"2001."+ur));
+        DbServ dbServs = ConfigBeanFactory.create(conf, DbServ.class);
+        System.out.println(dbServs.getDatabase().get("2001"));
+        System.out.println(dbServs.getDatabase().get("2002"));
+        System.out.println(dbServs.getDatabase().get("2003"));
     }
 
 }

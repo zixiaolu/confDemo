@@ -2,7 +2,7 @@ package com.zxl.conf;
 
 import java.util.Map;
 
-public class dbServ {
+public class DbServ {
     Map<String,Serv> database;
 
     public Map<String, Serv> getDatabase() {
