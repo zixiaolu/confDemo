@@ -1,0 +1,13 @@
+database:
+  2001:
+    username: root
+    password: 01234
+    url: database1
+  2002:
+    username: root
+    password: 0234
+    url: database2
+  2003:
+    username: root
+    password: 0234
+    url: database3

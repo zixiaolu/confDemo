@@ -1,0 +1,13 @@
+[database]
+  [database.2001]
+    username = "root"
+    password = 123
+    url = "bcd"
+  [database.2002]
+    username = "root"
+    password = 123
+    url = "bcd"
+  [database.2003]
+    username = "root"
+    password = 123456
+    url = "bcd"
